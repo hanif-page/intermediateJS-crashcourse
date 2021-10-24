@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Closure and Higher Order Function -->
+
+    <main>
+
+    </main>
+
+    <script>
+        const main = document.querySelector('main')
+        
+        // High order functions are functions that take in another function or return another function.
+        // factory function : function that manufacture/creat function a.k.a high order function that returns a function
+        // closure : function inside function
+        
+        // usecase example
+        function headingFactory (colour){
+            const closure = function(text){
+                const heading = document.createElement("h1")
+                heading.setAttribute('style', `color: ${colour}`);
+                heading.textContent = text;
+                return heading
+            }
+            return closure
+        }
+
+        // same output, but different technique
+        function createHeading(colour, text){
+            const heading = document.createElement("h1")
+            heading.setAttribute("style", `color: ${colour}`)
+            heading.textContent = text 
+            return heading
+        }
+    
+        // closure techniques
+        const createRedHeading = headingFactory("red");
+        const createBlueHeading = headingFactory("blue");
+        const head1 = createRedHeading('Hey thereee')
+        const head2 = createBlueHeading("I'm Blue")
+
+        // non-closure technique
+        const head3 = createHeading('gray', "I'm Gray")
+
+        // appending the heading
+        const itemToAppend = [head1, head2, head3]
+        for (i in itemToAppend) {
+            main.appendChild(itemToAppend[i])
+        }
+
+
+        // Conclusion: 
+        // - Higher Order Functions - a function that accepts another function as its argument or return a function as its result.
+        // - Closure - a function that is defined in another function.
+        // - Functional Programming (FP) techniques can help us to write more declarative and cleaner code.
+    </script>
+</body>
+</html>

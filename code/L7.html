@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body > * 
+        {
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Manupulating clipboard - Copy and Paste Text + Images -->
+
+    <article id="content-copy">
+        Copy this !!! :)
+    </article>
+    <button id="btn-copy">Copy</button>
+    <button id="btn-copy2">Copy2</button>
+    <button id="btn-paste">Paste</button>
+    <button id="btn-paste2">Paste2</button>
+
+    <article id="content-paste"></article>
+    <article id="content-paste2"></article>
+
+    <script>
+        const copyButton = document.getElementById("btn-copy")
+        const pasteButton = document.getElementById('btn-paste')
+        const pasteArticle = document.getElementById('content-paste')
+
+        // 'paste content to the article' event listener  
+        pasteButton.addEventListener('click', async (e) => {
+            pasteArticle.textContent = '';
+
+            // if the clipboard content not an image, it will be an error. Then we use try catch method, for solve that problem
+            try
+            {
+                // get clipboard content (array)
+                const data = await navigator.clipboard.read()
+                const clipboardContent = data[0] // get the latest clipboard copy
+    
+                // get the image blob (binary large object)
+                const imgBlob = await clipboardContent.getType('image/png'); // the argument is take one string, called MIME Type. Which is a string that represent a particular data type. How to write it => "conventional file type/extension type"
+    
+                // setting up the image blob to image url
+                const blobUrl = window.URL.createObjectURL(imgBlob)
+
+                // making the image element
+                const img = document.createElement("img")
+                img.src = blobUrl
+    
+                // append to the article
+                pasteArticle.appendChild(img)
+            } 
+
+            // it will be display the text/non-image that getting copied.
+            catch (err) 
+            {
+                console.log(err)
+
+                // read the non-image/text copied clipboard
+                const text = await navigator.clipboard.readText();
+                
+                // display it on the article
+                pasteArticle.innerText = text
+            }
+        })
+        
+        // copy button event listener
+        copyButton.addEventListener('click', async (e) => {
+            const content = document.getElementById
+            ('content-copy').innerText;
+
+            // copy to clipboard function
+            await navigator.clipboard.writeText(content);
+
+            // line of code below here, will be output an error on mozilla. So, try it on another browser to prevent the error 
+            const copied = await navigator.clipboard.readText();
+            console.log(copied)
+        })
+
+        // one liner copy function
+        const copyToClipboard = async text => await navigator.clipboard.writeText(text);
+        const btnTryCopy = document.getElementById("btn-copy2")
+        btnTryCopy.addEventListener('click', () => {
+            const dummyText = "Monkey Type LolLolLol";
+            copyToClipboard(dummyText);
+        })
+
+        const pasteItem = async () => {
+
+            const pasteArticle2 = document.getElementById('content-paste2')
+
+            // image copy
+            try  
+            {
+                // clipboard array
+                const clipBoard = await navigator.clipboard.read()
+                const latestClipBoard = clipBoard[0]
+
+                const imageBlob = await latestClipBoard.getType('image/png')
+                const imageURL = window.URL.createObjectURL(imageBlob)
+
+                const image = document.createElement('img')
+                image.src = imageURL
+
+                pasteArticle2.appendChild(image)
+            }
+            // other copy (text)
+            catch 
+            {
+                const item = await navigator.clipboard.writeText(text);
+                pasteArticle2.innerText += item
+            }
+        }
+
+        const pasteButton2 = document.getElementById('btn-paste2')
+        pasteButton2.addEventListener('click', pasteItem)
+
+        // Conclusion: 
+        // - The built-in clipboard object allow us to manipulate the clipboard with javascript (navigator.clipboard)
+        // - Blobs (Binary Large Object) represent file as an object 
+        // - Mime type is a string convention to describe a particular data type
+    </script>
+</body>
+</html>

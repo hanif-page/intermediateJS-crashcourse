@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Callback -->
+
+    <script>
+        // callback - a function that is passed to another function
+
+        window.addEventListener("click", (e) => {
+            // this is inside the callback function
+        })
+
+        // ----------------------afterShoppingCallback is an argument for callback function------
+        const shopping = (budget, afterShoppingCallback) => {
+            const spent = 100
+            
+            budget -= spent
+
+            // run the callback function before return statement
+            budget = afterShoppingCallback(budget);
+
+            return budget
+        }
+
+        // split the console.log, by making new a variable 
+        const leftOverBudget = shopping(1000, (budget) => {
+            console.log(`1) Budget Remain Before Watch Movie : $${budget}`)
+            console.log("1) Let's go watch movie after this !")
+
+            budget -= 30;
+            return `1) Budget Remain After Watch Movie : $${budget}`
+        } )
+        console.log(leftOverBudget)
+
+        // combine the console.log without make a new variable
+        console.log(shopping(500, (budget) => {
+            console.log(`2) Budget Remain Before Watch Movie : $${budget}`)    
+            console.log("2) Let's go watch movie after this !")
+
+            budget -= 50;
+            return `2) Budget Remain After Watch Movie : $${budget}`
+        }))
+        // note: 1) and 2) is just a marker
+
+
+        // Conclusion: 
+        // - Callback is a function passed to another function.
+        // - Callback function allows customisation for the end user.
+        // - Callback hell is not pretty, and we should try to avoid it as much as possible.
+
+        // callback hell example - if you a shopaholic, lmaoo
+        shopping(1000, (budget) => {
+            return shopping(budget, (budget) => {
+
+                return shopping(budget, (budget) => {
+
+                    return shopping(budget, (budget) => {
+
+                        // ...
+                    })
+                })
+            })
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- The 'this' keyword -->
+
+    <script>
+        const car = {
+            model: 'corolla',
+            brand: 'toyota',
+            drive: function(){
+                console.log(this)
+            }
+        }
+
+        // print car object
+        car.drive()
+
+        // print window object (because when we run the function below, the context is not car anymore, but it's window by default)
+        const boom = car.drive 
+        boom();
+
+        // print window object (by default, this is 'window' object)
+        console.log(this)
+
+        // 'this' keyword usecase example
+        const toad = {
+            xPos: 0,
+            yPos: 0,
+            moveLeft: function(unit) {
+                this.xPos -= unit
+            },
+            moveUp: function(unit) {
+                this.yPos += unit
+            },
+            moveRight: function(unit) {
+                this.xPos += unit
+            },
+            moveDown: function(unit) {
+                this.yPos -= unit
+            },
+            getPosition: function() {
+                console.log(`(${this.xPos},${this.yPos})`)
+                function inner(){
+                    console.log(this)
+                }
+
+                // this gonna print 'window' object
+                inner();
+                //  because we call the function by its own. But if we call a function by its object like 'toad.getPosition()', then 'this' keyword will be represent as the object itself.
+            }
+        }
+        toad.moveDown(90)
+        toad.moveRight(30)
+        toad.getPosition()
+
+
+        // Conclusion : 
+        // - The 'this' keyword represents the context in Javascript
+        // - By default, 'this' resolves to the global object, ie 'window' object in the browser
+        // - 'this' is useful to access information in the current context, e.g updating value of an object instance (this.choice = new_choice)
+    </script>
+</body>
+</html>

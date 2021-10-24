@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Why not var?! Var vs Let vs Const -->
+
+    <script>
+        var a = "a";
+        let b = "b";
+        const c = "c";
+
+        if(true) {
+            var a = "a scope"
+            let b = "b scope"
+            const c = "c scope"
+        }
+
+        // a will be printed as "a scope", because its not scope safe. Meanwhile let and const is scope safe.
+        console.log(a)
+        console.log(b)
+        console.log(c)
+
+
+        // Conclusion : 
+        // - Var sucks 
+        // - Var is not scope safe
+        // - Var variables are hoisted up (jadi artinya, Var jika di declare di atas. Dia bakal jadi global object, dan bisa diakses dimanapun (mau diluar scope/didalemnya))
+        // - We can't access a let/const variable before declaration, meanwhile we can do it with Var variable
+        // - Var variables are added to the window object by default 
+    </script>
+</body>
+</html>

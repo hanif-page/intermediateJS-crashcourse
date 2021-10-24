@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Promises, Async, Await -->
+
+    <script>
+        // synchronous
+        let hey = '1';
+        console.log(hey)
+
+        // asynchronous - it will be run after the all synchronous operation finished
+        setTimeout(() => {
+            console.log("2")
+        }, 0)
+
+        // synchronous
+        console.log('3')
+
+        // Promise
+        // another type of async operation in js
+        // an object that holds some logic to be executed later
+        // works the same way as promises in real life.
+        // When you make a promise, you won't do it right away
+        // The promise holds until you start to take action
+        // And this makes it an async operation
+
+        // manually make promises, without 'async' keyword
+        const buyIceCream = function(amount = 5) {
+
+            return new Promise(function(resolve, reject){
+                // resolve - a function to call when the promise is successful
+
+                // reject - a function to call when the promise is failed
+
+                setTimeout(function(){
+                    if(amount < 3){
+                        reject('not enough moneyy')
+                    } else {
+                        resolve('An Ice Cream!')
+                    }
+                })
+            })
+        }
+
+        // simpler way with 'async' keyword
+        const buyIceCream2 = async function(amount = 5){
+            if(amount < 3){
+                throw new Error('Not Enough Moneyy');
+            } else {
+                return "An Ice Cream !!!"
+            }
+        }
+
+        buyIceCream(2)
+            .then((response) => {
+                console.log(`Success: ${response}`)
+            })
+            .catch((error) => {
+                console.log(`Error: ${error}`)
+            })
+
+        buyIceCream2(2)
+            // basically, .then is for delivering the success promise
+            .then((res) => {
+                console.log(`Success: ${res}`)
+            })
+
+            // and, .catch is for delivering the rejected/failed promise
+            .catch((err) => {
+                console.log(`${err}`)
+            })
+
+        
+        // 'await' keyword usecase example
+        async function main(){
+            console.log('hey')
+            const iceCream = await buyIceCream2(20)
+            console.log(iceCream)
+            console.log('there')
+        }
+        main();
+
+        // Solving the callback hell problem
+        buyIceCream2(10)
+            .then((res) => {
+                return buyIceCream2(20)
+            })
+            .then((res) => {
+                return buyIceCream2(10)
+            })
+        
+
+        // Conclusion:
+        // - Synchronous operations run on the spot. Meanwhile, asynchronous operations run later in the event loop.
+        // - Event loop is the name of the queue system that javascript uses for async task.
+        // - Promises are async operations that aimed to solve the problems of callback
+        // - Async function returns promise. It is a nice helper keyword to save us from writing Promise boilerplate code.
+    </script>
+</body>
+</html>
