@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- API requests with Fetch -->
+
+    <script>
+
+        const url = "https://api.covid19api.com/countries"
+
+        // how to use the fetch function
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'accepts': "application/json",
+            }
+        })
+
+        // get the raw response from the api (represented by special response object)
+        .then((res) => {
+
+            // because we know that the api returning a json body. Then to read the json object in json format, we need to use .json() function
+            return res.json(); // return a promise, that will passed to the next .then()
+        }) 
+
+        // console.log the object
+        .then((res) => {
+            console.log(res) // on this line, we can do what ever we want to do with the object. Maybe access to the data inside, get some information, e.t.c
+        })
+    </script>
+</body>
+</html>

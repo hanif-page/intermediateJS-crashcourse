@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgb(46,46,46);
+            color: white;
+        }
+
+        input {
+            background-color: transparent;
+            border: 1px solid;
+            color: rgb(177, 182, 253);
+            font-size: large;
+            padding: 10px;
+            width: 500px;
+        }
+
+        input:focus {
+            border: 3px solid;
+            border-color: rgb(139, 146, 248);
+            outline-style: none;
+        }
+
+        .d-flex 
+        {
+            display: flex;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .align-center {
+            align-items: center;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .img-container {
+            position: relative;
+            margin-top: 50px;
+        }
+
+        #answer-text {
+            position: absolute;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <!-- API requests with Fetch -->
+    
+    <form class="d-flex align-center flex-col">
+        <label for="task">
+            <h1>Can't decide bro? Let us help ya</h1>
+        </label>
+
+        <input placeholder="Ask me a question!" type="text" id="task">
+    </form>
+
+    <section class="img-container d-flex justify-center">
+        <article id="thinking" class="hide">
+            <h1>Let me think... </h1>
+        </article>
+        <article id="img-article"></article>
+
+        <h1 id="answer-text"></h1>
+    </section>
+
+    <script>
+
+        const wtfUrl = 'https://yesno.wtf/api'
+
+        const imgArticle = document.getElementById('img-article')
+        const ansText = document.getElementById('answer-text')
+        const thinkingArticle = document.getElementById('thinking')
+
+        function showThinking(){
+            thinkingArticle.classList.remove("hide")
+        }
+        function hideThinking(){
+            thinkingArticle.classList.add("hide")
+        }
+
+        // when user typed in a question in the input, and hit enter
+        function decide(e) {
+            e.preventDefault() // stop the page refreshing
+
+            imgArticle.innerHTML = ""
+            ansText.innerHTML = ""
+
+            showThinking()
+            // call the api
+            fetch(wtfUrl, {
+                method: "GET",
+                headers: {
+                    'accept': 'application/json'
+                }
+            }).then(async (res) => {
+                const result = await res.json();
+                // display the result in 'img-article' and 'answer-text'
+
+                const img = document.createElement('img')
+                img.setAttribute('src', result.image)
+
+                imgArticle.appendChild(img)
+                ansText.textContent = result.answer
+                
+                hideThinking()
+            })
+        }
+    
+        document.querySelector('form').addEventListener('submit', decide) 
+
+        // Conclusion : 
+        // - We use the fetch() function to send HTTP request in JavaScript.
+        // - The fetch() function accepts 2 arguments, the first argument is the API endpoint (link), and the second argument is the request option.
+        // - The fetch() function returns a Promise, then we must use 'asyc' 'await' on the .then() function.
+    </script>
+</body>
+</html>
