@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Programming Paradigms -->
+
+    <script>
+        // Paradigms
+
+        // 1. Procedural - write as step by step instruction
+        let abc = 123;
+        if(abc > 1000)
+        {
+            abc = abc - 50;
+        }
+        
+        // 2. Object Orientated (OOP) - hide logic within objects (encapsulation)
+        console.log("heyy") // encapsulation
+        localStorage.getItem("yo") // encapsulation
+        // Encapsulation - hiding the logic inside an object or class
+        
+        // 3. Functional (FP) - describing the logic using functions
+        const fruits = ['apple', 'orange', 'kiwi', 'durian', 'watermelon']
+
+        // more readable and cleaner 
+        const result = fruits.map(fruit => fruit.toUpperCase())
+                             .filter(fruit => fruit.length > 4)
+        console.log(result)
+
+        // non-function way - not that readable 
+        let result2 = []
+        for (let i = 0; i < fruits.length; i++) {
+            const fruit = fruits[i];
+            if(fruit.length > 4) result2.push(fruit.toUpperCase())
+        }
+        console.log(result2)
+
+
+
+        // Conclusion / key takeaways
+        // - Procedural Programming - writing logic as step-by-step instructions.
+        // - Object Orientated Programming (OOP) - splitting logic into objects to easily reuse our code.
+        // - Functional Programming (FP) - describing the logic using function.
+        // - JavaScript is a prototype-based language. However, it supports OOP and FP. 
+    </script>
+</body>
+</html>

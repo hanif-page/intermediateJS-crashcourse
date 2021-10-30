@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Object and Array Destructuring -->
+
+    <script>
+
+        // Object destructure example:
+        const car = {
+            brand: 'toyota',
+            name: 'corolla',
+            colour: "blue",
+        }
+
+        // how to get an object items with an unproper way...
+        const brand0 = car.brand;
+        const name0 = car.name;
+        const colour0 = car.colour;
+        console.log(brand0, name0, colour0)
+
+        // how to get an object items with a proper/good way !
+        const {brand, colour, name} = car; // {brand, colour, name} is the key of the object items that we want to get
+        console.log(brand, colour, name)
+
+        // if you want to set the object items to a specific variable, then you can do this !
+        const {brand:brand123, colour: colour123, name: name123} = car // {brand:brand123} the meaning is => 'brand' is the key, and 'brand123' is the variable that we want to set for the 'brand' value.
+        console.log(brand123, colour123, name123)
+
+        // Array destructure example:
+        const fruits = ['apple', 'orange', 'kiwi', 'grape'];
+        const [first, second, ...remaining] = fruits; 
+        // 'first, second' is just a normal variable for each index at the fruits array. So on this condition, 'first' variable will be the first index on fruits array (apple), and 'second' variable will be the second index on fruits array (orange). 
+        // And the '...third' is a 'Rest Operator', which mean that it will pack the remaining items in the array that didn't get accessed (['kiwi', 'grape'])
+        console.log(first, second) // apple orange
+        console.log(remaining) // Array [ "kiwi", "grape" ]
+
+        let a = 5;
+        let b = 10;
+
+        // Old way to swap variable :
+        // let temp = a;
+        // a = b;
+        // b = temp;
+        // console.log(a, b)
+
+        // Swap variable with 'Array Destructure' :
+        [b, a] = [a, b]
+        console.log(`a = ${a}, b = ${b}`)
+
+
+
+        // Conclusion : 
+        // - Object destructuring is useful to extract properties out.
+        // - Array destructing is useful to extract the first few elements out from an array.
+    </script>
+</body>
+</html>

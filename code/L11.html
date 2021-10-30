@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- True nature of Object - Intro references, spread, and res -->
+
+    <script>
+        const car1 = {
+            colour: 'blue'
+        }
+
+        // try to clone an object (not a proper technique)
+        const car2 = car1
+
+        car2.colour = "red"
+        console.log(car1) // colour:"red", because it's getting change too when we change the colour of the car2
+
+        // A proper way to clone an object:
+        // 1. Object Assign function
+        const cloned = Object.assign({}, car1)
+        cloned.colour = "black"
+        console.log(car1)
+
+        // 2. Spread Operator => unpack an array or an object
+        const cloned2 = { ...car1 }
+        cloned2.colour = "green"
+        console.log(car1)
+
+        // another usecase of 'Spread Operator':
+        // 1. 
+        console.log(...["hey", "there", "you"])
+        // is equivalent to
+        console.log("hey", "there", "you")
+
+        // 2. 
+        const arr1 = [1, 2, 3];
+        const arr2 = [4, 5, 6];
+
+        const arr3 = [
+            ...arr1, 
+            ...arr2
+        ]
+        console.log(arr3) // [ 1, 2, 3, 4, 5, 6 ]
+
+        // 3. 
+        const obj1 = {
+            hey: 'there'
+        }
+        const obj2 = {
+            hey: "you",
+            food: "banana",
+        }
+        const obj3 = { 
+            ...obj1, 
+            ...obj2,
+            // combine the obj1 and obj2
+        }
+        console.log(obj3) 
+
+        // usecase of 'Rest Operator':
+        const add = (...nums) => { 
+            // nums set as an array 
+            // basically, the 'Rest Operator' is used to pack a function argument. So we can take a function, that take an infinite number of argument.
+            
+            let ans = 0;
+            for (let i of nums)
+            {
+                ans += i
+            }
+            const result = `${nums.join("+")} = ${ans}`
+            console.log(result)
+        }
+        add(1, 2, 3, 4, 5, 6, 1, 2, 3, 4, 5, 6)
+
+
+
+        // Conclusion : 
+        // - JavaScript stored data in the 'Heaps'.
+        // - Objects are references in JavaScript. To make a copy, we should clone the object. 
+        // - Triple dots (...) are referred to both 'Spread' and 'Rest' operator.
+        // - Spread is used to unpack arrays and objects. Rest is used to pack a function argument 
+    </script>
+</body>
+</html>
