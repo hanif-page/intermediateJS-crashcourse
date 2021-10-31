@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        Polymorphism -- Classes have the same methods, but different implementation 
+    -->
+
+    <script>
+
+        // Make an example of PaymentGateway
+
+        // base class
+        class PaymentGateway {
+            constructor(){
+                
+            }
+            connect(){
+                // connect to payment provider
+            }
+            pay(amount){
+                // ...
+            }
+            refund(amount){
+                // ...
+            }
+        }
+
+        // the brand of payment gateway (child class)
+        class PayPal extends PaymentGateway {
+            pay(amount) {
+                // should implement paypal specific logic
+            }
+            refund(amount) {
+                // should implement paypal specific logic
+            }
+            connect() {
+                // should implement paypal specific logic
+            }
+        }
+        class Visa extends PaymentGateway {
+            pay(amount) {
+                // should implement Visa specific logic
+            }
+            refund(amount) {
+                // should implement Visa specific logic
+            }
+            connect() {
+                // should implement Visa specific logic
+            }
+        }
+        class Mastercard extends PaymentGateway {
+            pay(amount) {
+                // should implement Mastercard specific logic
+            }
+            refund(amount) { 
+                // should implement Mastercard specific logic
+            }
+            connect() {
+                // should implement Mastercard specific logic
+            }
+        }
+
+        class Afterpay extends PaymentGateway {
+            // ...
+        }
+
+        class Customer {
+            makePayment(gateway, amount){
+                return gateway.pay(amount)
+            }
+            getRefund(gateway, amount){
+                return gateway.refund(amount)
+            }
+            complain(){
+                // something goes wrong ...
+            }
+        }
+
+        const karen = new Customer();
+
+        const paypal = new PayPal();
+        const card = new Visa();
+
+        karen.makePayment(paypal, 100);
+        karen.makePayment(card, 100);
+
+        karen.complain(); // Lol hahah
+    </script>
+
+    <!-- 
+        Key Takeaways / Conclusion :
+        - Polymorphism is the concept where classes have the same method signature but different implementation.
+        - Polymorphism helps us to write cleaner and more generic code, so our code will be easier to maintain in the long run.
+
+        note: I still don't understand this concept :)
+     -->
+</body>
+</html>

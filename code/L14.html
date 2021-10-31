@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Object Orientated Programming  -->
+
+    <script>
+
+        // normal ways to make an object
+        const toyota = {
+            name: 'toyota',
+            brand: 'toyota',
+            drive: function () {
+                console.log("brum brum")
+            }
+        }
+        const honda = {
+            name: 'civic',
+            brand: 'honda',
+            drive: function () {
+                console.log('brum brum')
+            }
+        }
+
+        // make an object template with class 
+        class Car {
+
+            // constructor function (initial properties)
+            constructor(name, brand) {
+                this.name = name;
+                this.brand = brand;
+            }
+
+            // this is called method (object/class function)
+            drive() {
+                console.log("brum brum, driving . . .")
+            }
+        }
+        // add new function inside 'Car' class, outside the class itself (with 'prototype')
+        Car.prototype.start = function() {
+            console.log('car started !')
+        }
+
+        // constructor function without class (old version way)
+        function Car1(name, brand) {
+            this.name = name;
+            this.brand = brand;
+            this.drive = function() {
+                console.log("brum brum, driving . . .")
+            }
+        }
+        // add new function inside 'Car1' class, outside the class itself (with 'prototype')
+        Car1.prototype.start = function() {
+            console.log('car1 started !')
+        }
+
+        // instantiating : make a new object base on a class
+        const suzuki = new Car('swift', 'suzuki') // suzuki is the instance of Car class
+        const suzuki1 = new Car1('swift1', 'suzuki') // suzuki1 is the instance of Car1 class
+    </script>
+    <!-- 
+        Key Takeaways / Conclusion : 
+        - Class is the template for creating object. 
+        - We use the 'new' keyword to create object instances from class.
+        - A class constructor is a special function that runs whenever an object is instantiated.
+        - The 'Constructor Function' has the same purpose as class, just different syntax.
+     -->
+</body>
+</html>

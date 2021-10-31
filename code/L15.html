@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Inheritance -->
+    <!-- 
+        Inheritance : Stopping us from repeating line of code
+        in Inheritance, there is a concept called "Base/Parent Class" and "Child/Daughter Class". So for the 'Daughter Class', it will be inherit/extends from the "Parent Class".
+     -->
+
+    <script>
+        // Base/Parent Class 
+        class Character {
+            constructor(health, magic, Ctype){
+                this.health = health;
+                this.magic = magic;
+                this.Ctype = Ctype.toUpperCase();
+            }
+
+            // all method for 'Character' class
+            walk() {console.log(`${this.Ctype} walking !`)} 
+
+            fight() {console.log(`${this.Ctype} fighting !`)}          
+        }
+
+        // Child/Daughter Class
+        class Knight extends Character{
+            // the 'extends' keyword meaning that this class extend from the 'Character' class.
+
+            // all method for 'Knight' class
+            ride() {}
+
+            charge() {}
+        }
+
+        // Child/Daughter Class
+        class Mage extends Character{
+            // the 'extends' keyword meaning that this class extend from the 'Character' class.
+
+            // method for 'Mage' class
+            cast() {}
+        }
+        
+        // Child/Daughter Class
+        class Warrior extends Knight{
+            // the meaning of this class is, 'Warrior' class will have the exact same things inside 'Knight' class.
+        }
+
+        // Child/Daughter Class - how to override the constructor function
+        class Marksman extends Character{
+            // override the parent constructor function 
+            constructor(health, magic, Ctype, shootLength){
+                super(health, magic, Ctype)
+                this.shootLength = shootLength;
+            }
+            
+            // method for 'Marksman' class
+            shoot() {console.log(`${this.Ctype} shoot the shot with ${this.shootLength} length !`)}
+        }
+
+        // making new object from class (instantiating)
+        const karen = new Knight(100, 50, "knight")
+        const karen2 = new Mage(100, 50, "mage")
+        const karen3 = new Warrior(100, 50, "warrior")
+        const karen4 = new Marksman(100, 50, "marksman", 30)
+    </script>
+
+    <!-- 
+        Key Takeaways / Conclusion : 
+        - Inheritances is the concept of a class extending another base/parent class so it can access all the properties and methods of the base class.
+        - The 'super' function is a special function that represent the constructor of the base class.
+     -->
+</body>
+</html>
