@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Why inheritance is bad | Intro to object composition -->
+
+    <script>
+
+        function eat(){
+            console.log("eat eat")
+        }
+        function move(){
+            console.log("move move")
+        }
+
+        // object composition : is the idea of building an object using multiple smaller object blocks, rather than defining a massive class.
+
+        // All the building block object !
+        const Animal = {
+            eat: eat
+        }
+        const Movable = {
+            move: move
+        }
+        const Flyable = {
+            fly: () => {
+                console.log("I believe I can fly !!")
+            }
+        }
+        const CanEatMeat = {
+            eatMeat: true
+        }
+        const canEatVeges = {
+            eatVeges: true
+        }
+        const Swimmable = {
+            swim: () => {
+                console.log("I believe I can swim !!")
+            }
+        }
+        const Runnable = {
+            run: () => {
+                console.log("I believe I can run !!")
+            }
+        }
+
+        // make the penguin class, but with the old technique way (without the 'class' syntax/keyword)
+        function Penguin(option = {}){
+            return {
+                // unpack the building block object (spread operator)
+                ...Animal,
+                ...Movable,
+                ...Swimmable,
+                ...CanEatMeat,
+                ...option
+            }
+        }
+
+        // exactly same thing with the 'Penguin' object, but use the object assign 
+        function Penguin2(option = {}){
+
+            // use the object assign technique
+            return Object.assign({}, 
+                Animal,
+                Movable,
+                Swimmable,
+                CanEatMeat,
+                option
+            )
+        }
+
+        function Eagle(option = {}){
+            return {
+                // unpack the building block object
+                ...Animal,
+                ...Movable,
+                ...Flyable,
+                ...CanEatMeat,
+                ...option
+            }
+        }
+
+        const kowalski = Penguin()
+        const skipper = Penguin2()
+        const gandalf = Eagle()
+    </script>
+    <!-- 
+        Key Takeaways / Conclusion : 
+        - Inheritance is not very flexible and hard to maintain.
+        - Object composition is a better way to create an Object template.
+        - Object composition is the idea of building an object via smaller building blocks and join them together.
+    -->
+</body>
+</html>
